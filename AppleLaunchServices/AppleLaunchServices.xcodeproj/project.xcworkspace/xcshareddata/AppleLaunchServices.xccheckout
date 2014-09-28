@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2D00B0FC-37E6-4357-B4E9-A1784416D826</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AppleLaunchServices</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CA914348A0A052BD9EAE32B914E97FE60220A7FE</key>
+		<string>https://github.com/wiretech/CC</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AppleLaunchServices/AppleLaunchServices.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CA914348A0A052BD9EAE32B914E97FE60220A7FE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/wiretech/CC</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CA914348A0A052BD9EAE32B914E97FE60220A7FE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CA914348A0A052BD9EAE32B914E97FE60220A7FE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
