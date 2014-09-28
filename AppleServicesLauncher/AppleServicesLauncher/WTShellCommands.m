@@ -10,6 +10,7 @@
 #import <limits.h>
 #import "WTShellCommands.h"
 
+
 @implementation WTShellCommands
 
 +(NSString *)runShellCommand :(NSString *)command withMaxBufferSize:(int) maxBufferSize {
@@ -17,8 +18,8 @@
         maxBufferSize = INT_MAX;
     }
     NSString *newCommand = [NSString stringWithFormat:@"%@ 2>&1", command];
-    FILE *fp;
     const char *cStrCommand = [newCommand cStringUsingEncoding:NSUTF8StringEncoding];
+    FILE *fp;
     fp = popen(cStrCommand, "r");
     if (fp == NULL) {
         NSLog(@"Failed to open process");
@@ -26,19 +27,34 @@
     }
     char *buffer = NULL;
     buffer = (char*)malloc(4);
-    while (!feof(fp)) {
-        buffer = realloc(buffer, sizeof(buffer)+1);
-        sprintf(buffer, "%s%c", buffer, fgetc(fp));
+    if (buffer == NULL) {
+        NSLog(@"Failed to allocate memory");
+        return nil;
     }
-    printf("printf: %s\n", buffer);
-    //NSLog(@"nslog: %s\n", buffer);
+    size_t len = 0, cap = 4;
+    buffer = malloc(cap);
+    int c;
+    if (buffer == NULL) {
+        NSLog(@"Failed to allocate memory");
+        return nil;
+    }
+    while (EOF != (c = fgetc(fp))) {
+        if (len >= cap) {
+            if (len >= cap) {
+                cap += cap;
+                buffer = realloc(buffer, cap);
+                if (buffer == NULL) {
+                    NSLog(@"Could not reallocate memory");
+                    return nil;
+                }
+            }
+        }
+        buffer[len++] = c;
+    }
+    NSString *ret = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
     fclose(fp);
-//    NSString *ret = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
-//    free(buffer);
-    char *buffer2 = "abc";
-    NSString *ret = [NSString stringWithCString:buffer2 encoding:NSASCIIStringEncoding];
+    free(buffer);
     return ret;
-//    return buffer;
 }
 
 @end
