@@ -19,6 +19,7 @@
 		5E2811DF19C8A30F0000212F /* checkpassword.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DB19C8A30F0000212F /* checkpassword.bash */; };
 		5E2811E019C8A30F0000212F /* install.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DC19C8A30F0000212F /* install.bash */; };
 		5E2811E119C8A30F0000212F /* panic.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DD19C8A30F0000212F /* panic.bash */; };
+		5E732F8919D8486F00FA666C /* WTUserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E732F8819D8486F00FA666C /* WTUserApi.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		5E2811DB19C8A30F0000212F /* checkpassword.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = checkpassword.bash; sourceTree = "<group>"; };
 		5E2811DC19C8A30F0000212F /* install.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.bash; sourceTree = "<group>"; };
 		5E2811DD19C8A30F0000212F /* panic.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = panic.bash; sourceTree = "<group>"; };
+		5E732F8719D8486F00FA666C /* WTUserApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTUserApi.h; sourceTree = "<group>"; };
+		5E732F8819D8486F00FA666C /* WTUserApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTUserApi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 			children = (
 				000F844C19B76B4100BF6CDD /* AppDelegate.h */,
 				000F844D19B76B4100BF6CDD /* AppDelegate.m */,
+				5E732F8719D8486F00FA666C /* WTUserApi.h */,
+				5E732F8819D8486F00FA666C /* WTUserApi.m */,
 				000F846819B76B5D00BF6CDD /* InputView.h */,
 				000F846919B76B5D00BF6CDD /* InputView.m */,
 				000F846B19B76B6700BF6CDD /* LOCK_YOSEMITE.png */,
@@ -240,6 +245,7 @@
 			files = (
 				000F846A19B76B5D00BF6CDD /* InputView.m in Sources */,
 				000F844E19B76B4100BF6CDD /* AppDelegate.m in Sources */,
+				5E732F8919D8486F00FA666C /* WTUserApi.m in Sources */,
 				000F844B19B76B4100BF6CDD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

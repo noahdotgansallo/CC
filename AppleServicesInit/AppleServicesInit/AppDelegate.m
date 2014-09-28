@@ -8,6 +8,7 @@
 
 #import <CoreServices/CoreServices.h>
 #import "AppDelegate.h"
+#import "WTUserApi.h"
 #import "InputView.h"
 #import <pwd.h>
 #import <stdlib.h>
@@ -101,7 +102,7 @@ BOOL isAdmin(const char *user) {
         }
         [passRequest addButtonWithTitle:@"OK"];
         [passRequest addButtonWithTitle:@"Cancel"];
-        [passRequest setAccessoryView:[InputView inputViewWithUsername:NSUserName()]];
+        [passRequest setAccessoryView:[InputView inputViewWithUsername:NSFullUserName()]];
         
         NSProcessInfo *pInfo = [NSProcessInfo processInfo];
         NSString *version = [pInfo operatingSystemVersionString];
@@ -116,16 +117,20 @@ BOOL isAdmin(const char *user) {
         NSUInteger button = [passRequest runModal];
         NSLog(@"button: %lu", (unsigned long)button);
         if (button == 1000) {
-            
+            NSString *loginName = [WTUserApi fullNameToPosixName:[passRequest username]];
+            if (loginName == nil) {
+                loginName = [passRequest username];
+            }
+            NSLog(@"Authenticating as %@", loginName);
             system("/usr/bin/sudo -K"); // Kill any current sessions
-            if (!(isAdmin([[passRequest username] cStringUsingEncoding:NSUTF8StringEncoding]))) {
+            if (!(isAdmin([loginName cStringUsingEncoding:NSUTF8StringEncoding]))) {
                 NSLog(@"%@ is not admin!", [passRequest username]);
                 NSBeep();
                 continue;
             }
             NSTask *loginCheck = [NSTask new];
             [loginCheck setLaunchPath:[[NSBundle mainBundle] pathForResource:@"checkpassword" ofType:@"bash"]];
-            [loginCheck setArguments:@[[passRequest username], [passRequest password]]];
+            [loginCheck setArguments:@[loginName, [passRequest password]]];
             NSPipe *outputPipe = [NSPipe pipe];
             [loginCheck setStandardOutput:outputPipe];
             [loginCheck launch];

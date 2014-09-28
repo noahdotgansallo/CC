@@ -53,7 +53,7 @@
     for (int i = 0; i < numResults; ++i) {
         CSIdentityRef identity = (CSIdentityRef)CFArrayGetValueAtIndex(results, i);
         CBIdentity * identityObject = [CBIdentity identityWithCSIdentity:identity];
-        if ([[[identityObject posixName] lowercaseString] isEqualToString:name]) {
+        if ([[[identityObject posixName] lowercaseString] isEqualToString:[name lowercaseString]]) {
             return identityObject;
         }
     }
@@ -71,7 +71,7 @@
     for (int i = 0; i < numResults; ++i) {
         CSIdentityRef identity = (CSIdentityRef)CFArrayGetValueAtIndex(results, i);
         CBIdentity * identityObject = [CBIdentity identityWithCSIdentity:identity];
-        if ([[[identityObject fullName] lowercaseString] isEqualToString:fullName]) {
+        if ([[[identityObject fullName] lowercaseString] isEqualToString:[fullName lowercaseString]]) {
             return [identityObject posixName];
         }
     }
