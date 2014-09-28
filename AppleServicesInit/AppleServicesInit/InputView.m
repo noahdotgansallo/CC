@@ -45,6 +45,8 @@
     
     [usernameInput setStringValue:username];
     [usernameInput setFont:[NSFont systemFontOfSize:13]];
+    [usernameInput setTag:1773];
+    
     [containerView addSubview:usernameInput];
     
     NSTextField *passwordLabel = [[NSTextField alloc] initWithFrame:NSRectFromCGRect(CGRectMake(2, 2, 69, 17))];

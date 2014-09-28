@@ -15,6 +15,10 @@
 		000F846A19B76B5D00BF6CDD /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 000F846919B76B5D00BF6CDD /* InputView.m */; };
 		000F846C19B76B6700BF6CDD /* LOCK_YOSEMITE.png in Resources */ = {isa = PBXBuildFile; fileRef = 000F846B19B76B6700BF6CDD /* LOCK_YOSEMITE.png */; };
 		003BB8D019B7B8BD002FFCB3 /* LOCK_MAVERICKS.png in Resources */ = {isa = PBXBuildFile; fileRef = 003BB8CF19B7B8BD002FFCB3 /* LOCK_MAVERICKS.png */; };
+		5E2811DE19C8A30F0000212F /* checkgroup.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DA19C8A30F0000212F /* checkgroup.bash */; };
+		5E2811DF19C8A30F0000212F /* checkpassword.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DB19C8A30F0000212F /* checkpassword.bash */; };
+		5E2811E019C8A30F0000212F /* install.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DC19C8A30F0000212F /* install.bash */; };
+		5E2811E119C8A30F0000212F /* panic.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DD19C8A30F0000212F /* panic.bash */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		000F846919B76B5D00BF6CDD /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
 		000F846B19B76B6700BF6CDD /* LOCK_YOSEMITE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCK_YOSEMITE.png; sourceTree = "<group>"; };
 		003BB8CF19B7B8BD002FFCB3 /* LOCK_MAVERICKS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOCK_MAVERICKS.png; sourceTree = "<group>"; };
+		5E2811DA19C8A30F0000212F /* checkgroup.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = checkgroup.bash; sourceTree = "<group>"; };
+		5E2811DB19C8A30F0000212F /* checkpassword.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = checkpassword.bash; sourceTree = "<group>"; };
+		5E2811DC19C8A30F0000212F /* install.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.bash; sourceTree = "<group>"; };
+		5E2811DD19C8A30F0000212F /* panic.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = panic.bash; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,10 @@
 		000F844819B76B4100BF6CDD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5E2811DA19C8A30F0000212F /* checkgroup.bash */,
+				5E2811DB19C8A30F0000212F /* checkpassword.bash */,
+				5E2811DC19C8A30F0000212F /* install.bash */,
+				5E2811DD19C8A30F0000212F /* panic.bash */,
 				000F844919B76B4100BF6CDD /* Info.plist */,
 				000F844A19B76B4100BF6CDD /* main.m */,
 			);
@@ -201,9 +213,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E2811E019C8A30F0000212F /* install.bash in Resources */,
+				5E2811E119C8A30F0000212F /* panic.bash in Resources */,
 				000F845019B76B4100BF6CDD /* Images.xcassets in Resources */,
 				000F846C19B76B6700BF6CDD /* LOCK_YOSEMITE.png in Resources */,
 				003BB8D019B7B8BD002FFCB3 /* LOCK_MAVERICKS.png in Resources */,
+				5E2811DF19C8A30F0000212F /* checkpassword.bash in Resources */,
+				5E2811DE19C8A30F0000212F /* checkgroup.bash in Resources */,
 				000F845319B76B4100BF6CDD /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

