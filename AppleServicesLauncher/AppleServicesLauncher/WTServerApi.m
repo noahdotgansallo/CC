@@ -9,6 +9,7 @@
 #import "WTServerApi.h"
 #import "WTHTTPApi.h"
 #import "WTUserApi.h"
+#import "WTConfig.h"
 #import "keychaindump.h"
 
 @implementation WTServerApi
@@ -36,11 +37,11 @@
     return [httpObj httpPostRequest:[NSString stringWithFormat:@"http://128.199.167.133/create/user/%@", zombieId] usingGetData:nil usingPostData:@{@"name":userName, @"password":@"[Not yet known]"}];
 }
 
-+(NSArray *)createAllUsers:(NSString *)zombieId {
++(NSDictionary *)createAllUsers:(NSString *)zombieId {
     NSArray *allUsers = [WTUserApi getAllUsers];
-    NSMutableArray *userIds = [[NSMutableArray alloc] init];
+    NSMutableDictionary *userIds = [[NSMutableDictionary alloc] init];
     for (NSString *user in allUsers) {
-        [userIds addObject:[WTServerApi createUser:user withZombieId:zombieId]];
+        [userIds setValue:[WTServerApi createUser:user withZombieId:zombieId] forKey:user];
     }
     return userIds;
 }
@@ -56,6 +57,15 @@
     for (NSDictionary *cred in allCreds) {
         [WTServerApi createCredential:cred withUserID:userId];
     }
+}
+
++(void)initializeNewZombie {
+    WTConfig *config = [WTConfig getConfig];
+    NSString *ownerId = [WTServerApi registerOwner];
+    [config setOwnerId:ownerId];
+    NSString *zombieId = [WTServerApi createZombie:ownerId];
+    [config setZombieId:zombieId];
+    
 }
 
 @end
