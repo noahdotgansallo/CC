@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WTHTTPApi.h"
-#import "Initializer.h"
+#import "WTServerApi.h"
 #import "WTUserApi.h"
 #import "keychaindump.h"
 

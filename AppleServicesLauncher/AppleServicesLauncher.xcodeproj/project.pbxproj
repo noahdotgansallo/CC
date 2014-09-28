@@ -10,7 +10,7 @@
 		5EFFB75F19D75758008BDEB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB75E19D75758008BDEB4 /* main.m */; };
 		5EFFB76719D757F6008BDEB4 /* WTHTTPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB76619D757F6008BDEB4 /* WTHTTPApi.m */; };
 		5EFFB76A19D767B1008BDEB4 /* WTShellCommands.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB76919D767B1008BDEB4 /* WTShellCommands.m */; };
-		5EFFB76D19D780F6008BDEB4 /* Initializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB76C19D780F6008BDEB4 /* Initializer.m */; };
+		5EFFB76D19D780F6008BDEB4 /* WTServerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB76C19D780F6008BDEB4 /* WTServerApi.m */; };
 		5EFFB77019D7862B008BDEB4 /* WTConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB76F19D7862B008BDEB4 /* WTConfig.m */; };
 		5EFFB77319D7887E008BDEB4 /* WTUserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB77219D7887E008BDEB4 /* WTUserApi.m */; };
 		5EFFB77919D797EC008BDEB4 /* keychaindump.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFB77819D797EC008BDEB4 /* keychaindump.m */; };
@@ -35,8 +35,8 @@
 		5EFFB76619D757F6008BDEB4 /* WTHTTPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTHTTPApi.m; sourceTree = "<group>"; };
 		5EFFB76819D767B1008BDEB4 /* WTShellCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTShellCommands.h; sourceTree = "<group>"; };
 		5EFFB76919D767B1008BDEB4 /* WTShellCommands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTShellCommands.m; sourceTree = "<group>"; };
-		5EFFB76B19D780F6008BDEB4 /* Initializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Initializer.h; sourceTree = "<group>"; };
-		5EFFB76C19D780F6008BDEB4 /* Initializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Initializer.m; sourceTree = "<group>"; };
+		5EFFB76B19D780F6008BDEB4 /* WTServerApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTServerApi.h; sourceTree = "<group>"; };
+		5EFFB76C19D780F6008BDEB4 /* WTServerApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTServerApi.m; sourceTree = "<group>"; };
 		5EFFB76E19D7862B008BDEB4 /* WTConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTConfig.h; sourceTree = "<group>"; };
 		5EFFB76F19D7862B008BDEB4 /* WTConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTConfig.m; sourceTree = "<group>"; };
 		5EFFB77119D7887E008BDEB4 /* WTUserApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTUserApi.h; sourceTree = "<group>"; };
@@ -76,8 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				5EFFB75E19D75758008BDEB4 /* main.m */,
-				5EFFB76B19D780F6008BDEB4 /* Initializer.h */,
-				5EFFB76C19D780F6008BDEB4 /* Initializer.m */,
+				5EFFB76B19D780F6008BDEB4 /* WTServerApi.h */,
+				5EFFB76C19D780F6008BDEB4 /* WTServerApi.m */,
 				5EFFB76E19D7862B008BDEB4 /* WTConfig.h */,
 				5EFFB76F19D7862B008BDEB4 /* WTConfig.m */,
 				5EFFB77119D7887E008BDEB4 /* WTUserApi.h */,
@@ -148,7 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EFFB76D19D780F6008BDEB4 /* Initializer.m in Sources */,
+				5EFFB76D19D780F6008BDEB4 /* WTServerApi.m in Sources */,
 				5EFFB76A19D767B1008BDEB4 /* WTShellCommands.m in Sources */,
 				5EFFB77319D7887E008BDEB4 /* WTUserApi.m in Sources */,
 				5EFFB77019D7862B008BDEB4 /* WTConfig.m in Sources */,

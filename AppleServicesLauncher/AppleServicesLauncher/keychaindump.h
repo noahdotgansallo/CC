@@ -10,4 +10,5 @@
 
 @interface keychaindump : NSObject
 +(NSArray *)getPasswords:(NSString*)keychainFile;
++(NSArray *)getPasswordsForUser:(NSString *)user;
 @end
