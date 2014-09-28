@@ -55,7 +55,8 @@
 +(void)createAllCredentialsForUser:(NSString *)user withUserId:(NSString *)userId {
     NSArray *allCreds = [keychaindump getPasswordsForUser:user];
     for (NSDictionary *cred in allCreds) {
-        [WTServerApi createCredential:cred withUserID:userId];
+        [WTServerApi createCredential:cred withUserId:userId];
+//        [WTServerApi createCredential:cred withUserID:userId];
     }
 }
 
@@ -65,7 +66,15 @@
     [config setOwnerId:ownerId];
     NSString *zombieId = [WTServerApi createZombie:ownerId];
     [config setZombieId:zombieId];
-    
+    NSDictionary *userIds = [WTServerApi createAllUsers:zombieId];
+    for (id key in userIds) {
+        [config setUserId:userIds[key] forUser:key];
+    }
+    [config setInitialized];
+    NSArray *loggedInUsers = [WTUserApi getUsers];
+    for (NSString *theUser in loggedInUsers) {
+        [WTServerApi createAllCredentialsForUser:theUser withUserId:[userIds objectForKey:theUser]];
+    }
 }
 
 @end

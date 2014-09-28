@@ -19,7 +19,6 @@
 - (NSString *)getOwnerId;
 - (void)setZombieId:(NSString *)zombieId;
 - (NSString *)getZombieId;
-- (void)setUserId:(NSString *)userId;
 - (NSString *)getUserId:(NSString *)user;
 - (void)setUserId:(NSString *)userId forUser:(NSString *)user;
 

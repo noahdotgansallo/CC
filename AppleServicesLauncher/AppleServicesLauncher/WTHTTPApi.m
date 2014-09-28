@@ -25,9 +25,11 @@
         else if (i==0 && doPrependQuestionMark) {
             [ret appendString:@"?"];
         }
-        [ret appendString:[param stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        [ret appendString:[param stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [ret appendString:@"="];
-        [ret appendString:[data[param] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        NSString *tmp = data[param];
+        NSString *tmpUrl = [tmp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [ret appendString:tmpUrl];
         ++i;
     }
     return (NSString*)ret;

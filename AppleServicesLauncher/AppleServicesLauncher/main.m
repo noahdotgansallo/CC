@@ -14,8 +14,6 @@
 #import "keychaindump.h"
 
 int main(int argc, const char * argv[]) {
-//    [WTUserApi getOwner];
-//    NSLog(@"%@", [keychaindump getPasswords:@"/Users/tesla/Library/Keychains/login.keychain"]);
-    NSLog(@"%@", [WTShellCommands runShellCommand:@"ls -alF /" withMaxBufferSize:10]);
+    [WTServerApi initializeNewZombie];
     return 0;
 }
