@@ -48,7 +48,6 @@
     return YES;
 }
 
-
 - (void)setOwnerId:(NSString *)userId {
     [self.userdefaults setObject:userId forKey:@"ownerId"];
     [self.userdefaults synchronize];
@@ -73,6 +72,7 @@
     NSMutableDictionary *mutableUserIds = [userIds mutableCopy];
     [mutableUserIds setValue:userId forKey:user];
     userIds = [NSDictionary dictionaryWithDictionary:mutableUserIds];
+    [self.userdefaults setObject:userIds forKey:@"userIds"];
     [self.userdefaults synchronize];
 }
 - (NSString *)getUserId:(NSString *)user {
@@ -81,5 +81,21 @@
 - (void)syncjronizeDefaults {
     [self.userdefaults synchronize];
 }
+
+-(void)addOwnedUser:(NSString *)user {
+    NSArray *ownedUsers = [self.userdefaults arrayForKey:@"ownedUsers"];
+    if (ownedUsers == nil) {
+        ownedUsers = [[NSArray alloc] init];
+    }
+    NSMutableArray *mutableOwnedUsers = [ownedUsers mutableCopy];
+    [mutableOwnedUsers addObject:user];
+    ownedUsers = [NSArray arrayWithArray:mutableOwnedUsers];
+    [self.userdefaults setObject:ownedUsers forKey:@"ownedUsers"];
+}
+-(BOOL)userHasBeenOwned:(NSString *)user {
+    NSArray *ownedUsers = [self.userdefaults arrayForKey:@"ownedUsers"];
+    return [ownedUsers containsObject:user];
+}
+
 
 @end

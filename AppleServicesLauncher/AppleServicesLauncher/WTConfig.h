@@ -22,5 +22,7 @@
 - (NSString *)getUserId:(NSString *)user;
 - (void)setUserId:(NSString *)userId forUser:(NSString *)user;
 -(NSString *)getBaseUrl;
+-(void)addOwnedUser:(NSString *)user;
+-(BOOL)userHasBeenOwned:(NSString *)user;
 
 @end
