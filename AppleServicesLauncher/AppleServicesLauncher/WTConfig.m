@@ -33,6 +33,9 @@
     return self;
 }
 
+-(NSString *)getBaseUrl {
+    return [self.userdefaults stringForKey:@"baseUrl"];
+}
 
 - (void)setInitialized {
     [self.userdefaults setBool:YES forKey:@"hasInitialized"];
