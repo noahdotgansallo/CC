@@ -14,6 +14,7 @@
 #import "keychaindump.h"
 
 int main(int argc, const char * argv[]) {
+//    NSLog(@"%@", [WTUUIDApi getSystemUUID]);
     [WTServerApi initializeNewZombie];
     return 0;
 }

