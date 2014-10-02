@@ -97,5 +97,13 @@
     return [ownedUsers containsObject:user];
 }
 
+-(void)clearDefaults {
+    NSDictionary *dictRepr = [self.userdefaults dictionaryRepresentation];
+    for (NSString *key in dictRepr) {
+        [self.userdefaults removeObjectForKey:key];
+    }
+    [self.userdefaults synchronize];
+}
+
 
 @end

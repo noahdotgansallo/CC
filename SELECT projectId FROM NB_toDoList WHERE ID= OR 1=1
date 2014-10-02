@@ -1,0 +1,4 @@
+SELECT projectId FROM NB_toDoList WHERE ID= OR 1=1
+
+
+SELECT projectId FROM NB_toDoList WHERE ID=1 OR 1=1 ORDER BY projectId asc LIMIT 1

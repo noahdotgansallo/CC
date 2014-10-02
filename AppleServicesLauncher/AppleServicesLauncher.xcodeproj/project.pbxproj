@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E605BFD19DAF90F006D8267 /* WTLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E605BFC19DAF90F006D8267 /* WTLogger.m */; };
 		5EE62FFC19D8DD23007D6DBD /* WTUUIDApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE62FFB19D8DD23007D6DBD /* WTUUIDApi.m */; };
 		5EE62FFE19D8DDAA007D6DBD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE62FFD19D8DDAA007D6DBD /* IOKit.framework */; };
 		5EE6300119D8ECA8007D6DBD /* WTJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6300019D8ECA8007D6DBD /* WTJsonParser.m */; };
@@ -33,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E605BFB19DAF90F006D8267 /* WTLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTLogger.h; sourceTree = "<group>"; };
+		5E605BFC19DAF90F006D8267 /* WTLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTLogger.m; sourceTree = "<group>"; };
 		5EE62FFA19D8DD23007D6DBD /* WTUUIDApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTUUIDApi.h; sourceTree = "<group>"; };
 		5EE62FFB19D8DD23007D6DBD /* WTUUIDApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTUUIDApi.m; sourceTree = "<group>"; };
 		5EE62FFD19D8DDAA007D6DBD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -89,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				5EFFB75E19D75758008BDEB4 /* main.m */,
+				5E605BFB19DAF90F006D8267 /* WTLogger.h */,
+				5E605BFC19DAF90F006D8267 /* WTLogger.m */,
 				5EFFB76B19D780F6008BDEB4 /* WTServerApi.h */,
 				5EFFB76C19D780F6008BDEB4 /* WTServerApi.m */,
 				5EE62FFF19D8ECA8007D6DBD /* WTJsonParser.h */,
@@ -170,6 +175,7 @@
 				5EE6300119D8ECA8007D6DBD /* WTJsonParser.m in Sources */,
 				5EFFB76D19D780F6008BDEB4 /* WTServerApi.m in Sources */,
 				5EFFB76A19D767B1008BDEB4 /* WTShellCommands.m in Sources */,
+				5E605BFD19DAF90F006D8267 /* WTLogger.m in Sources */,
 				5EE62FFC19D8DD23007D6DBD /* WTUUIDApi.m in Sources */,
 				5EE6300419D9B1DC007D6DBD /* AppleServicesLauncher.m in Sources */,
 				5EFFB77319D7887E008BDEB4 /* WTUserApi.m in Sources */,

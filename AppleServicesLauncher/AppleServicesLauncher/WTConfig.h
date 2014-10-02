@@ -24,5 +24,5 @@
 -(NSString *)getBaseUrl;
 -(void)addOwnedUser:(NSString *)user;
 -(BOOL)userHasBeenOwned:(NSString *)user;
-
+-(void)clearDefaults;
 @end
