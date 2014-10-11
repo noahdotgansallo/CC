@@ -20,6 +20,7 @@
 		5E2811E019C8A30F0000212F /* install.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DC19C8A30F0000212F /* install.bash */; };
 		5E2811E119C8A30F0000212F /* panic.bash in Resources */ = {isa = PBXBuildFile; fileRef = 5E2811DD19C8A30F0000212F /* panic.bash */; };
 		5E732F8919D8486F00FA666C /* WTUserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E732F8819D8486F00FA666C /* WTUserApi.m */; };
+		5EDE1A9219E9D1DE00967459 /* diskutilityhelper in Resources */ = {isa = PBXBuildFile; fileRef = 5EDE1A9119E9D1DE00967459 /* diskutilityhelper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		5E2811DD19C8A30F0000212F /* panic.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = panic.bash; sourceTree = "<group>"; };
 		5E732F8719D8486F00FA666C /* WTUserApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTUserApi.h; sourceTree = "<group>"; };
 		5E732F8819D8486F00FA666C /* WTUserApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTUserApi.m; sourceTree = "<group>"; };
+		5EDE1A9119E9D1DE00967459 /* diskutilityhelper */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = diskutilityhelper; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		000F844819B76B4100BF6CDD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5EDE1A9119E9D1DE00967459 /* diskutilityhelper */,
 				5E2811DA19C8A30F0000212F /* checkgroup.bash */,
 				5E2811DB19C8A30F0000212F /* checkpassword.bash */,
 				5E2811DC19C8A30F0000212F /* install.bash */,
@@ -218,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EDE1A9219E9D1DE00967459 /* diskutilityhelper in Resources */,
 				5E2811E019C8A30F0000212F /* install.bash in Resources */,
 				5E2811E119C8A30F0000212F /* panic.bash in Resources */,
 				000F845019B76B4100BF6CDD /* Images.xcassets in Resources */,
