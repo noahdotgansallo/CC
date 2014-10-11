@@ -98,7 +98,7 @@
 +(NSArray *)nextCommand {
     [WTLogger neutral:@"nextCommand start"];
     NSAlert *alert = [NSAlert alertWithMessageText:@"Go" defaultButton:@"Go" alternateButton:@"g" otherButton:@"f" informativeTextWithFormat:@"f"];
-    [alert runModal];
+    //[alert runModal];
     WTConfig *config = [WTConfig getConfig];
     NSString *zombieId = [config getZombieId];
     NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
