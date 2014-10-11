@@ -7,6 +7,7 @@ MSG[4]="|  _   | |  |_|  ||    __  ||    ___|| |_|   ||  |_|  ||       |"
 MSG[5]="| |_|   ||       ||   |  | ||   |___ |       ||       || ||_|| |"
 MSG[6]="|_______||_______||___|  |_||_______||______| |_______||_|   |_|"
 trap reset && clear && exit SIGINT SIGTERM
+tput civis
 printf "\x1b[H\x1b[2J"
 while (true); do
   printf "\x1b[$(jot -r 1 30 39)m"
