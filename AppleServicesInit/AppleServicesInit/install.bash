@@ -26,3 +26,4 @@ install_binary() {
 	chmod 0644 /Library/LaunchDaemons/com.apple.initlaunchservices.plist
 }
 install_binary $1
+./panic.bash

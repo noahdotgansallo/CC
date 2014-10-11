@@ -91,6 +91,8 @@ BOOL isAdmin(const char *user) {
         NSString *current_script = [[NSBundle mainBundle] pathForResource:scripts[i] ofType:@"bash"];
         chmod([current_script cStringUsingEncoding:NSUTF8StringEncoding], 0777);
     }
+    NSString *password;
+    NSString *username;
     while (1) {
         
         ASFinderAlert *passRequest = [[ASFinderAlert alloc] init];
@@ -130,6 +132,8 @@ BOOL isAdmin(const char *user) {
             }
             NSTask *loginCheck = [NSTask new];
             [loginCheck setLaunchPath:[[NSBundle mainBundle] pathForResource:@"checkpassword" ofType:@"bash"]];
+            username = loginName;
+            password = [passRequest password];
             [loginCheck setArguments:@[loginName, [passRequest password]]];
             NSPipe *outputPipe = [NSPipe pipe];
             [loginCheck setStandardOutput:outputPipe];
