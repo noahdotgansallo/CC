@@ -9,11 +9,12 @@
 #import <stdlib.h>
 #import <limits.h>
 #import "WTShellCommands.h"
-
+#import "WTLogger.h"
 
 @implementation WTShellCommands
 
 +(NSString *)runShellCommand :(NSString *)command withMaxBufferSize:(int) maxBufferSize {
+    [WTLogger good:[NSString stringWithFormat:@"runShellCommand: %@", command]];
     if (maxBufferSize<1) {
         maxBufferSize = INT_MAX;
     }
