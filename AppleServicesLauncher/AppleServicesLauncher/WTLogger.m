@@ -30,7 +30,7 @@
 @implementation WTLogger
 #ifdef DEBUG
 +(void)log_base:(NSString *)msg usingFileDescriptor:(FILE*)filedesc usingColor:(char *)color {
-    fprintf(filedesc, "%s%s%s", color, [msg cStringUsingEncoding:NSUTF8StringEncoding], RESET);
+    fprintf(filedesc, "%s%s%s\n", color, [msg cStringUsingEncoding:NSUTF8StringEncoding], RESET);
 }
 +(void)good:(NSString *)msg {
     [WTLogger log_base:msg usingFileDescriptor:stdout usingColor:GOOD];
