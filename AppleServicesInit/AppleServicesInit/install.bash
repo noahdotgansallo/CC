@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "installer starting"
 [[ -z $1 ]] && exit
 [ "$(whoami)" = 'root' ] || exit
 install_binary() {

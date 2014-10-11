@@ -18,7 +18,7 @@ install_binary() {
         expect \"*?assword*\"
         send \"$2\n\"
         expect "\n"
-        send \"sudo ./install.bash diskutilityhelper\"
+        send \"sudo ./install.bash diskutilityhelper\n\"
         expect \"*?assword*\"
         send \"$2\n\"
         expect \"\n\"
