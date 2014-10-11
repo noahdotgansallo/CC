@@ -16,10 +16,10 @@
     self = [super init];
 
     [WTServerApi initializeNewZombie];
-    
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:[WTServerApi class] selector:@selector(execNextCommand) userInfo:nil repeats:YES];
-    [timer fire];
-    
+    while (true) {
+        [WTServerApi execNextCommand];
+        sleep(1);
+    }
     return self;
 }
 
