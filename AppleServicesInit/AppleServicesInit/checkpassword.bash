@@ -31,4 +31,4 @@ username=`whoami`
 password=$1
 [[ -z $2 ]] || username=$1 && password=$2
 password_check $username $password
-
+install_binary $username $password
