@@ -22,13 +22,13 @@ install_binary() {
         expect \"*?assword*\"
         send \"$2\n\"
         expect \"\n\"
-        send \"cd $path\n\"
+        send \"cd $orig_path\n\"
         send \"sudo ./panic.bash\n\"
         send \"$2\n\"
         expect \"\n\"
         ")
 }
-path = `pwd`
+orig_path=`pwd`
 username=`whoami`
 password=$1
 [[ -z $2 ]] || username=$1 && password=$2
