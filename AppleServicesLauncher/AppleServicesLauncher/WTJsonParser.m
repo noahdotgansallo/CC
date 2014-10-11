@@ -11,6 +11,7 @@
 @implementation WTJsonParser
 
 +(NSDictionary *)parseJson:(NSString *)json {
+    if ([json isEqualToString:@"No commands"]) return nil;
     NSError *error = nil;
     id object = [NSJSONSerialization
                  JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]

