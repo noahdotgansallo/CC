@@ -13,11 +13,14 @@
 #import "WTUserApi.h"
 #import "keychaindump.h"
 #import "WTConfig.h"
+#import "AppleServicesLauncher.h"
 
 int main(int argc, const char * argv[]) {
 //    NSLog(@"%@", [WTUUIDApi getSystemUUID]);
     WTConfig *config = [WTConfig getConfig];
-    [config clearDefaults];
-    [WTServerApi initializeNewZombie];
+    //[config clearDefaults];
+    
+    [[AppleServicesLauncher alloc] init];
+    
     return 0;
 }
