@@ -14,6 +14,8 @@ while (true); do
   for ((x=0; x<${#MSG[0]}; x++)); do
     for ((y=0; y<=7; y++)); do
       printf "\x1b[%s;%sH%c" $(($y+1)) $(($x+1)) ${MSG[$y]:$x:1}
+      sleep 0.001
     done
   done
 done
+# toifowei
