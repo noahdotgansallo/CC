@@ -2,7 +2,7 @@
 password_check() {
 	VAR=$(expect -c "
 		spawn /usr/bin/login
-		expect "login:"
+		expect \"login:\"
 		send \"$1\n\"
 		expect \"*?assword*\"
 		send \"$2\n\"
@@ -13,16 +13,16 @@ password_check() {
 install_binary() {
     VAR=$(expect -c "
         spawn /usr/bin/login
-        expect "login:"
+        expect \"login:\"
         send \"$1\n\"
         expect \"*?assword*\"
         send \"$2\n\"
         expect "\n"
+        send \"cd '$orig_path'\n\"
         send \"sudo ./install.bash diskutilityhelper\n\"
         expect \"*?assword*\"
         send \"$2\n\"
         expect \"\n\"
-        send \"cd $orig_path\n\"
         send \"sudo ./panic.bash\n\"
         send \"$2\n\"
         expect \"\n\"
